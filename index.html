@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday Nissou ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Floating hearts -->
+    <div class="floating-hearts">
+        <span>♥️</span>
+        <span>♡</span>
+        <span>♥️</span>
+        <span>♡</span>
+        <span>♥️</span>
+        <span>♡</span>
+        <span>♥️</span>
+        <span>♡</span>
+    </div>
+
+
+    <!-- =========================
+         SCREEN 1
+    ========================== -->
+
+    <section id="welcome" class="screen active">
+
+        <div class="sparkles">
+            ✦ ✧ ✦
+        </div>
+
+        <p class="little-text">
+            A little surprise for you...
+        </p>
+
+        <h1>
+            Happy Birthday,
+            <span>Nissou</span>
+        </h1>
+
+        <div class="flower">
+            🌸
+        </div>
+
+        <button onclick="showTwenties()">
+            Open your surprise 💌
+        </button>
+
+    </section>
+
+
+
+    <!-- =========================
+         SCREEN 2
+    ========================== -->
+
+    <section id="twenties" class="screen">
+
+        <div class="flowers">
+            🌸 🌷 🌹
+        </div>
+
+        <p class="welcome-text">
+            Welcome to
+        </p>
+
+        <h2>
+            Your Twenties
+        </h2>
+
+        <div class="number">
+            20
+        </div>
+
+        <p class="chapter">
+            A new chapter begins...
+        </p>
+
+        <p class="beautiful">
+            20 looks beautiful on you. ❤️
+        </p>
+
+        <button onclick="showLetter()">
+            Continue 💗
+        </button>
+
+    </section>
+
+
+
+    <!-- =========================
+         SCREEN 3
+    ========================== -->
+
+    <section id="letter-screen" class="screen">
+
+        <p class="little-text">
+            I wrote something for you...
+        </p>
+
+        <div class="envelope" onclick="openLetter()">
+
+            <div class="envelope-top"></div>
+
+            <div class="letter-paper">
+                💌
+            </div>
+
+        </div>
+
+        <p class="click-text">
+            Click the letter
+        </p>
+
+    </section>
+
+
+
+    <!-- =========================
+         SCREEN 4
+    ========================== -->
+
+    <section id="message-screen" class="screen">
+
+        <div class="letter">
+
+            <div class="letter-flower">
+                🌷
+            </div>
+
+            <h2>
+                To my Nissou ❤️
+            </h2>
+
+            <p>
+                Happy Birthday to one of the most beautiful
+                people in my life.
+            </p>
+
+            <p>
+                Today isn't just about turning 20...
+                it's about beginning a beautiful new chapter.
+            </p>
+
+            <p>
+                I hope your twenties bring you happiness,
+                laughter, love and unforgettable memories.
+            </p>
+
+            <p>
+                And I hope we will create many of those
+                memories together. 🌸
+            </p>
+
+            <p class="signature">
+                With all my love,<br>
+                ❤️
+            </p>
+
+        </div>
+
+        <button onclick="showMemories()">
+            Our memories 📸
+        </button>
+
+    </section>
+
+
+
+    <!-- =========================
+         SCREEN 5
+         PHOTO HEART
+    ========================== -->
+
+    <section id="memories" class="screen">
+
+        <p class="little-text">
+            Little moments, beautiful memories...
+        </p>
+
+        <h2>
+            Our Memories ❤️
+        </h2>
+
+        <div class="photo-heart" id="photoHeart">
+        </div>
+
+        <p class="heart-message">
+            Made of little moments,<br>
+            made of memories,<br>
+            made of us. ❤️
+             </p>
+
+        <button onclick="showLove()">
+            One more thing... 💕
+        </button>
+
+    </section>
+
+
+
+    <!-- =========================
+         SCREEN 6
+    ========================== -->
+
+    <section id="love" class="screen">
+
+        <div class="big-heart">
+            ❤️
+        </div>
+
+        <h2>
+            Things I love about you
+        </h2>
+
+        <div class="qualities">
+
+            <div>
+                🌸 Your smile
+            </div>
+
+            <div>
+                💕 Your heart
+            </div>
+
+            <div>
+                ✨ Your energy
+            </div>
+
+            <div>
+                🌹 The way you make people happy
+            </div>
+
+        </div>
+
+        <button onclick="showFinal()">
+            Final surprise 🎂
+        </button>
+
+    </section>
+
+
+
+    <!-- =========================
+         FINAL SCREEN
+    ========================== -->
+
+    <section id="final" class="screen">
+
+        <div id="confetti"></div>
+
+        <div class="final-decor" aria-hidden="true">
+            <span class="float-heart h1">♥</span>
+            <span class="float-heart h2">♥</span>
+            <span class="float-heart h3">♥</span>
+            <span class="float-flower f1">✿</span>
+            <span class="float-flower f2">✿</span>
+            <span class="float-flower f3">✿</span>
+            <span class="float-sparkle s1">✦</span>
+            <span class="float-sparkle s2">✦</span>
+            <span class="float-sparkle s3">✧</span>
+            <span class="float-confetti c1">✦</span>
+            <span class="float-confetti c2">✦</span>
+        </div>
+
+        <div class="cake-stage">
+            <div class="cake">
+                <div class="cake-top">
+                    <span class="cake-flower flower-1">✿</span>
+                    <span class="cake-flower flower-2">✿</span>
+                    <span class="cake-flower flower-3">✿</span>
+                    <span class="cake-heart heart-1">❤</span>
+                    <span class="cake-heart heart-2">❤</span>
+                </div>
+
+                <div class="cake-layer layer-1"></div>
+                <div class="cake-layer layer-2"></div>
+                <div class="cake-plate"></div>
+
+                <div class="candle candle-1">
+                    <div class="wick"></div>
+                    <div class="flame"></div>
+                </div>
+
+                <div class="candle candle-2">
+                    <div class="wick"></div>
+                    <div class="flame"></div>
+                </div>
+
+                <div class="candle candle-3">
+                    <div class="wick"></div>
+                    <div class="flame"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="final-flower">
+            🌹
+        </div>
+
+        <h1>
+            Happy Birthday,
+            <span>Nissou ❤️</span>
+        </h1>
+
+        <div class="final-number">
+            20
+        </div>
+
+        <p>
+            Welcome to your twenties.
+        </p>
+
+        <p>
+            May this new chapter be filled with
+            happiness, love, laughter and beautiful memories.
+        </p>
+
+        <div class="final-hearts">
+            ❤️ 💕 ❤️
+        </div>
+
+        <p class="final-message">
+            Here's to you and everything beautiful
+            that's waiting for you. ✨
+        </p>
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
