@@ -148,7 +148,7 @@ function createPhotoHeart() {
                 );
 
             const source =
-                "SN/" + availablePhotos[index % availablePhotos.length];
+                availablePhotos[index % availablePhotos.length];
 
             img.src = source;
             img.alt = "Photo mémoire " + (index + 1);
@@ -161,7 +161,7 @@ function createPhotoHeart() {
             img.style.animationDelay = (index * 0.08) + "s";
 
             img.onerror = () => {
-                img.src = "SN/" + availablePhotos[index % availablePhotos.length];
+                img.src =  availablePhotos[index % availablePhotos.length];
             };
 
             heart.appendChild(img);
