@@ -31,6 +31,8 @@
 
     <section id="welcome" class="screen active">
 
+        <div class="balloon-field" aria-hidden="true"></div>
+
         <div class="sparkles">
             ✦ ✧ ✦
         </div>
@@ -253,7 +255,7 @@
 
     <section id="final" class="screen">
 
-        <div id="confetti"></div>
+        <div id="confetti" aria-hidden="true"></div>
 
         <div class="final-decor" aria-hidden="true">
             <span class="float-heart h1">♥</span>
@@ -283,53 +285,23 @@
                 <div class="cake-layer layer-2"></div>
                 <div class="cake-plate"></div>
 
-                <div class="candle candle-1">
-                    <div class="wick"></div>
-                    <div class="flame"></div>
-                </div>
-
-                <div class="candle candle-2">
-                    <div class="wick"></div>
-                    <div class="flame"></div>
-                </div>
-
-                <div class="candle candle-3">
-                    <div class="wick"></div>
-                    <div class="flame"></div>
-                </div>
+                <div class="candle-group" id="candleGroup" role="img" aria-label="20 birthday candles"></div>
             </div>
         </div>
 
-        <div class="final-flower">
-            🌹
+        <p class="final-instruction">Make a wish, Nissou ✨</p>
+
+        <button class="final-wish-button" type="button" onclick="makeWish()">
+            Make a wish ✨
+        </button>
+
+        <div class="wish-reveal" id="wishReveal" aria-live="polite" hidden>
+            <p class="wish-result">May all your wishes come true. ❤️</p>
+            <div class="after-wish" id="afterWish" hidden>
+                <p>Welcome to your twenties, Nissou.</p>
+                <p>Here's to 20 beautiful years and many more memories together. ❤️</p>
+            </div>
         </div>
-
-        <h1>
-            Happy Birthday,
-            <span>Nissou ❤️</span>
-        </h1>
-
-        <div class="final-number">
-            20
-        </div>
-
-        <p>
-            Welcome to your twenties.
-        </p>
-
-        <p>
-            May this new chapter be filled with
-            happiness, love, laughter and beautiful memories.
-        </p>
-
-        <div class="final-hearts">
-            ❤️ 💕 ❤️
-        </div>
-
-        <p class="final-message">
-            Here's to you and everything beautiful
-            that's waiting for you. ✨
-        </p>
 
     </section>
 

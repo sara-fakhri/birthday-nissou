@@ -1139,6 +1139,233 @@ h2 {
 }
 
 
+
+
+/* =====================================
+   RESPONSIVE LAYOUT AND WELCOME BALLOONS
+===================================== */
+
+.screen {
+    inset: 0;
+    z-index: 1;
+    height: 100dvh;
+    min-height: 100dvh;
+    padding: clamp(16px, 4vw, 30px);
+    overflow-x: hidden;
+}
+
+.floating-hearts {
+    position: fixed;
+    z-index: 0;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+#welcome {
+    z-index: 2;
+    isolation: isolate;
+}
+
+.balloon-field {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+#welcome > :not(.balloon-field) {
+    position: relative;
+    z-index: 1;
+}
+
+.balloon {
+    position: absolute;
+    bottom: -18vh;
+    aspect-ratio: 3 / 4;
+    border-radius: 50% 50% 48% 48% / 42% 42% 55% 55%;
+    box-shadow: inset -7px -8px 12px rgba(93, 20, 61, 0.12), 0 6px 20px rgba(92, 17, 48, 0.12);
+    animation: balloonRise 14s linear forwards;
+    will-change: transform, opacity;
+}
+
+.balloon::before {
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 10px;
+    height: 8px;
+    content: "";
+    background: inherit;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform: translateX(-50%);
+}
+
+.balloon::after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 1px;
+    height: 30px;
+    content: "";
+    background: rgba(255, 255, 255, 0.48);
+    transform: rotate(4deg);
+    transform-origin: top;
+}
+
+.balloon-pink {
+    background: radial-gradient(ellipse at 32% 25%, #fff8fb 0 5%, #ffc1d5 18%, #ee79a0 100%);
+}
+
+.balloon-light-pink {
+    background: radial-gradient(ellipse at 32% 25%, #fff 0 5%, #ffe3ec 22%, #f6a9c3 100%);
+}
+
+.balloon-red {
+    background: radial-gradient(ellipse at 32% 25%, #fff0f4 0 5%, #ff9eb7 22%, #d93e68 100%);
+}
+
+.balloon-white {
+    background: radial-gradient(ellipse at 32% 25%, #fff 0 8%, #fff9fc 28%, #e8d9e5 100%);
+}
+
+.balloon-purple {
+    background: radial-gradient(ellipse at 32% 25%, #fff8ff 0 5%, #e7c2ef 22%, #ae7abf 100%);
+}
+
+.balloon-accent {
+    position: absolute;
+    bottom: -10vh;
+    color: rgba(255, 244, 250, 0.9);
+    font-size: 16px;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.65);
+    animation: accentRise 9s ease-out forwards;
+}
+
+@keyframes balloonRise {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+
+    12% {
+        opacity: 0.9;
+    }
+
+    55% {
+        transform: translate3d(var(--drift-middle), -62vh, 0) rotate(var(--tilt));
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(var(--drift), -125vh, 0) rotate(var(--tilt-return));
+    }
+}
+
+@keyframes accentRise {
+    0% {
+        opacity: 0;
+        transform: translateY(0) rotate(-10deg);
+    }
+
+    18%, 72% {
+        opacity: 0.85;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-115vh) rotate(18deg);
+    }
+}
+
+button {
+    min-height: 48px;
+    max-width: calc(100vw - 32px);
+    line-height: 1.3;
+    white-space: normal;
+}
+
+.envelope {
+    width: min(72vw, 240px);
+    height: auto;
+    aspect-ratio: 3 / 2;
+}
+
+.envelope-top {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #ff9fba;
+    clip-path: polygon(0 0, 100% 0, 50% 53%);
+}
+
+.letter {
+    width: min(100%, 650px);
+    padding: clamp(20px, 6vw, 40px);
+}
+
+@media (max-width: 600px) {
+    .screen {
+        padding: 20px 16px;
+    }
+
+    .little-text {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: clamp(2.1rem, 9vw, 3.5rem);
+    }
+
+    h2 {
+        font-size: clamp(1.8rem, 8vw, 2.8rem);
+    }
+
+    button {
+        padding: 14px 24px;
+        font-size: 16px;
+    }
+
+    .flower {
+        font-size: clamp(44px, 17vw, 65px);
+        margin: 20px;
+    }
+
+    .envelope {
+        margin: 24px auto;
+    }
+
+    .letter h2 {
+        font-size: clamp(26px, 8vw, 40px);
+    }
+
+    .letter p {
+        font-size: 16px;
+        line-height: 1.65;
+    }
+
+    .photo-heart {
+        width: min(94vw, 860px);
+        height: min(76vw, 540px);
+        flex: none;
+    }
+
+    .heart-message {
+        font-size: 17px;
+        padding: 8px 10px;
+    }
+
+    .qualities div {
+        max-width: calc(100vw - 40px);
+        padding: 13px 18px;
+        font-size: 17px;
+    }
+
+    #final {
+        padding: 24px 16px;
+    }
+}
 /* =====================================
    PHONE
 ===================================== */
@@ -1167,5 +1394,702 @@ h2 {
 
         width: 50px;
         height: 50px;
+    }
+}
+
+
+/* =====================================
+   INTERACTIVE FINAL CAKE
+===================================== */
+
+#final {
+    isolation: isolate;
+    overflow-x: hidden;
+    overflow-y: auto;
+    gap: clamp(3px, 1vh, 10px);
+    padding: clamp(16px, 3vh, 28px) 16px;
+    scrollbar-width: thin;
+}
+
+#final::before {
+    z-index: 0;
+}
+
+#final > :not(.final-decor):not(#confetti) {
+    flex-shrink: 0;
+}
+
+#final .cake-stage {
+    z-index: 2;
+    width: min(100%, 620px);
+    margin: 0;
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    animation: none;
+}
+
+#final .cake-stage::before {
+    position: absolute;
+    z-index: 0;
+    top: 10%;
+    left: 50%;
+    width: 80%;
+    aspect-ratio: 1;
+    content: "";
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 221, 236, 0.2), transparent 68%);
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+#final.active .cake-stage {
+    animation: cakeAppear 1.2s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+#final .cake {
+    z-index: 1;
+    width: min(100%, 540px);
+    height: clamp(220px, 70vw, 360px);
+    margin: 0;
+    container-type: inline-size;
+    filter: drop-shadow(0 0 24px rgba(255, 211, 231, 0.22));
+}
+
+#final .cake-top {
+    bottom: 40cqw;
+    width: 76cqw;
+    height: 14cqw;
+    border-radius: 12cqw 12cqw 8cqw 8cqw;
+}
+
+#final .layer-1 {
+    bottom: 25cqw;
+    width: 84cqw;
+    height: 24cqw;
+}
+
+#final .layer-2 {
+    width: 96cqw;
+    height: 27cqw;
+}
+
+#final .cake-plate {
+    bottom: -3cqw;
+    width: 100cqw;
+    height: max(12px, 5cqw);
+}
+
+#final .candle-group {
+    position: absolute;
+    z-index: 4;
+    inset: 0;
+    pointer-events: none;
+}
+
+#final .candle {
+    bottom: var(--candle-bottom, 54cqw);
+    z-index: 3;
+    width: 2cqw;
+    min-width: 7px;
+    max-width: 11px;
+    height: 11cqw;
+    border-radius: 1cqw 1cqw 0.6cqw 0.6cqw;
+    background: repeating-linear-gradient(135deg, #fffafc 0 4px, #f4c1d4 4px 7px);
+    box-shadow: 0 0 10px rgba(255, 224, 238, 0.35);
+}
+
+#final .candle-back {
+    --candle-bottom: 58cqw;
+    z-index: 2;
+}
+
+#final .candle-front {
+    --candle-bottom: 54cqw;
+    z-index: 3;
+}
+
+#final .wick {
+    top: -1.5cqw;
+    width: max(2px, 0.6cqw);
+    height: 2cqw;
+}
+
+#final .flame {
+    top: -4.5cqw;
+    width: 2.8cqw;
+    min-width: 9px;
+    max-width: 15px;
+    height: 3.8cqw;
+    min-height: 12px;
+    max-height: 20px;
+    z-index: 2;
+    transform-origin: 50% 85%;
+}
+
+#final .flame-extinguishing {
+    animation: flameOut 850ms ease-in var(--extinguish-delay) forwards;
+}
+
+@keyframes flameOut {
+    0% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateX(-50%) scale(1) rotate(0deg);
+    }
+
+    45% {
+        opacity: 0.75;
+        transform: translateX(-50%) scale(0.72, 1.12) rotate(12deg);
+    }
+
+    100% {
+        opacity: 0;
+        filter: blur(4px);
+        transform: translateX(-50%) scale(0.15) rotate(24deg);
+    }
+}
+
+#final .final-wish-button {
+    position: relative;
+    z-index: 3;
+    margin: 2px 0 6px;
+    color: #a91d49;
+    box-shadow: 0 8px 28px rgba(255, 196, 218, 0.28), 0 10px 30px rgba(0, 0, 0, 0.22);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.4s ease;
+}
+
+#final .final-instruction {
+    position: relative;
+    z-index: 3;
+    margin: 0;
+    color: #fff3f8;
+    font-size: clamp(18px, 3vw, 24px);
+    font-style: italic;
+    text-shadow: 0 0 18px rgba(255, 212, 230, 0.55);
+    transition: opacity 650ms ease, visibility 650ms ease;
+}
+
+#final .final-wish-button:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 10px 34px rgba(255, 196, 218, 0.42), 0 12px 32px rgba(0, 0, 0, 0.24);
+}
+
+#final .final-wish-button:disabled {
+    opacity: 0.62;
+    cursor: default;
+}
+
+#final .final-wish-button {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 650ms ease, visibility 650ms ease;
+}
+
+#final.celebration-active .final-instruction,
+#final.celebration-active .final-wish-button {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#final.wish-started .cake {
+    animation: cakeWishGlow 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes cakeWishGlow {
+    from {
+        filter: drop-shadow(0 0 10px rgba(255, 211, 231, 0.16));
+    }
+
+    to {
+        filter: drop-shadow(0 0 30px rgba(255, 211, 231, 0.5));
+    }
+}
+
+#final .wish-reveal {
+    position: relative;
+    z-index: 3;
+    width: min(100%, 640px);
+    padding: 8px 12px 18px;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 900ms ease, transform 900ms ease;
+}
+
+#final .wish-reveal.is-visible,
+#final .after-wish.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#final .wish-reveal[hidden],
+#final .after-wish[hidden] {
+    display: none !important;
+}
+
+#final .wish-result {
+    color: #fff3f8;
+    font-size: clamp(20px, 4vw, 28px);
+    text-shadow: 0 0 20px rgba(255, 212, 230, 0.62);
+}
+
+#final .after-wish {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 900ms ease, transform 900ms ease;
+}
+
+#final .after-wish p {
+    margin: 10px auto;
+    font-size: clamp(16px, 3.4vw, 21px);
+}
+
+#final #confetti {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+#final .celebration-confetti,
+#final .celebration-float {
+    position: absolute;
+    top: -8%;
+    color: #ffe0ec;
+    text-shadow: 0 0 12px rgba(255, 225, 238, 0.75);
+    will-change: transform, opacity;
+}
+
+#final .celebration-confetti {
+    animation: confettiDrift var(--duration, 5s) cubic-bezier(.2, .65, .45, 1) forwards;
+}
+
+#final .celebration-float {
+    top: auto;
+    bottom: -8%;
+    font-size: clamp(14px, 3vw, 22px);
+    animation: heartAscend var(--duration, 5s) ease-out forwards;
+}
+
+@keyframes confettiDrift {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+
+    12% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(var(--drift), 115vh, 0) rotate(var(--spin));
+    }
+}
+
+@keyframes heartAscend {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0) scale(0.75);
+    }
+
+    18%, 72% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(var(--drift), -115vh, 0) scale(1.15);
+    }
+}
+
+@media (max-width: 600px) {
+    #final {
+        gap: 2px;
+        padding: 14px 14px 22px;
+    }
+
+    #final .final-wish-button {
+        margin: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #final .cake-stage,
+    #final .candle,
+    #final .flame,
+    #final .final-flower {
+        animation-duration: 0.01ms !important;
+    }
+}
+
+
+/* =====================================
+   FINAL RESPONSIVE POLISH
+===================================== */
+
+@media (max-width: 600px) {
+    .little-text {
+        max-width: 100%;
+        font-size: clamp(16px, 4.4vw, 18px);
+        line-height: 1.45;
+    }
+
+    .welcome-text {
+        font-size: clamp(19px, 5.5vw, 23px);
+    }
+
+    .chapter {
+        font-size: clamp(18px, 5vw, 21px);
+        line-height: 1.45;
+    }
+
+    .beautiful {
+        max-width: 30rem;
+        font-size: clamp(17px, 4.5vw, 19px);
+        line-height: 1.5;
+    }
+
+    .click-text {
+        font-size: clamp(17px, 4.5vw, 19px);
+    }
+
+    .letter {
+        padding: clamp(18px, 5vw, 25px);
+        margin-bottom: clamp(14px, 4vw, 24px);
+        border-radius: 16px;
+    }
+
+    .letter h2 {
+        font-size: clamp(25px, 7.5vw, 32px);
+        line-height: 1.2;
+    }
+
+    .letter p {
+        font-size: clamp(16px, 4.2vw, 18px);
+        line-height: 1.65;
+    }
+
+    .qualities {
+        width: min(100%, 460px);
+        gap: clamp(10px, 3vw, 15px);
+        margin: clamp(18px, 5vw, 28px) 0;
+    }
+
+    .qualities div {
+        width: 100%;
+        padding: 12px clamp(14px, 4vw, 22px);
+        font-size: clamp(16px, 4.3vw, 18px);
+        line-height: 1.4;
+    }
+
+    button {
+        padding: 14px clamp(20px, 6vw, 28px);
+        font-size: clamp(16px, 4vw, 18px);
+    }
+
+    #memories {
+        justify-content: flex-start;
+        padding-top: clamp(22px, 6vh, 38px);
+    }
+
+    #memories .photo-heart {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: start;
+        gap: clamp(7px, 2.5vw, 12px);
+        width: min(100%, 430px);
+        height: auto;
+        flex: 0 0 auto;
+        margin: clamp(12px, 4vw, 18px) auto;
+        padding: 4px;
+        filter: drop-shadow(0 12px 20px rgba(87, 12, 45, 0.14));
+    }
+
+    #memories .photo-heart::before {
+        display: none;
+    }
+
+    #memories .memory-photo {
+        position: relative;
+        top: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        max-width: none;
+        height: auto;
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+        border-width: 2px;
+        border-radius: 10px;
+        transform: none !important;
+        animation: memoryGridReveal 0.55s ease both;
+        animation-delay: 0s;
+    }
+
+    #memories .heart-message {
+        max-width: min(100%, 30rem);
+        font-size: clamp(16px, 4.2vw, 18px);
+        line-height: 1.5;
+        margin: 6px 0 12px;
+    }
+}
+
+@keyframes memoryGridReveal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    .letter {
+        width: min(100%, 620px);
+        padding: clamp(24px, 4vw, 34px);
+    }
+
+    .letter p {
+        font-size: 17px;
+        line-height: 1.7;
+    }
+
+    .qualities div {
+        font-size: 18px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+    .screen {
+        min-height: 100dvh;
+        height: 100dvh;
+        padding: clamp(6px, 2dvh, 14px) clamp(16px, 3vw, 32px);
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    button {
+        min-height: 44px;
+        padding: 10px clamp(18px, 3vw, 28px);
+        font-size: clamp(15px, 4dvh, 17px);
+    }
+
+    #welcome {
+        gap: 0;
+    }
+
+    #welcome .sparkles {
+        margin: 0 0 2px;
+        font-size: clamp(20px, 7dvh, 27px);
+    }
+
+    #welcome .little-text {
+        margin: 0 0 3px;
+        font-size: clamp(15px, 4.4dvh, 18px);
+    }
+
+    #welcome h1 {
+        font-size: clamp(28px, 8.2dvh, 40px);
+        line-height: 1;
+    }
+
+    #welcome h1 span {
+        margin-top: 4px;
+    }
+
+    #welcome .flower {
+        margin: 3px 0 5px;
+        font-size: clamp(30px, 9dvh, 42px);
+    }
+
+    #twenties {
+        gap: clamp(1px, 0.8dvh, 5px);
+    }
+
+    #twenties .flowers {
+        margin: 0 0 2px;
+        font-size: clamp(22px, 7dvh, 32px);
+        line-height: 1;
+    }
+
+    #twenties .welcome-text {
+        font-size: clamp(16px, 4.5dvh, 20px);
+    }
+
+    #twenties h2,
+    #love h2,
+    #memories h2 {
+        max-width: 100%;
+        font-size: clamp(23px, 6.5dvh, 32px);
+        line-height: 1.1;
+    }
+
+    #twenties .number {
+        font-size: clamp(74px, 30dvh, 120px);
+        line-height: 0.9;
+    }
+
+    #twenties .chapter {
+        font-size: clamp(15px, 4dvh, 18px);
+    }
+
+    #twenties .beautiful {
+        margin: 2px 0 4px;
+        font-size: clamp(15px, 3.8dvh, 17px);
+    }
+
+    #letter-screen .little-text {
+        margin: 0 0 2px;
+        font-size: clamp(15px, 4dvh, 17px);
+    }
+
+    #letter-screen .envelope {
+        width: min(52vw, 46dvh, 290px);
+        margin: clamp(6px, 1.8dvh, 12px);
+    }
+
+    #letter-screen .letter-paper {
+        top: 22%;
+        left: 31.25%;
+        width: 37.5%;
+        height: 62.5%;
+        font-size: clamp(24px, 8dvh, 34px);
+    }
+
+    #letter-screen .click-text {
+        margin: 0;
+        font-size: clamp(15px, 3.8dvh, 17px);
+    }
+
+    #message-screen .letter {
+        width: min(90vw, 760px);
+        max-height: calc(100dvh - 62px);
+        overflow-y: auto;
+        padding: clamp(10px, 2.4dvh, 16px) clamp(18px, 3vw, 28px);
+        margin: 0 0 6px;
+        border-radius: 14px;
+    }
+
+    #message-screen .letter-flower {
+        font-size: clamp(22px, 6.5dvh, 29px);
+        line-height: 1;
+    }
+
+    #message-screen .letter h2 {
+        margin: 3px 0 5px;
+        font-size: clamp(19px, 5.5dvh, 25px);
+        line-height: 1.15;
+    }
+
+    #message-screen .letter p {
+        margin: clamp(3px, 0.9dvh, 5px) 0;
+        font-size: clamp(13px, 3.4dvh, 15px);
+        line-height: 1.35;
+    }
+
+    #message-screen .letter .signature {
+        margin-top: 5px !important;
+    }
+
+    #memories {
+        justify-content: center;
+        gap: 0;
+        padding-top: clamp(5px, 1.4dvh, 9px);
+        padding-bottom: clamp(5px, 1.4dvh, 9px);
+    }
+
+    #memories .little-text {
+        margin: 0 0 2px;
+        font-size: clamp(14px, 3.8dvh, 16px);
+    }
+
+    #memories .photo-heart {
+        width: min(90vw, 850px);
+        height: min(42dvh, 170px);
+        flex: 0 0 auto;
+        margin: 2px auto;
+        padding: 2px;
+    }
+
+    #memories .memory-photo {
+        width: clamp(32px, 10dvh, 48px) !important;
+        max-width: none;
+        border-width: 2px;
+        border-radius: 8px;
+    }
+
+    #memories .heart-message {
+        max-width: min(100%, 34rem);
+        margin: 3px 0 5px;
+        padding: 3px 8px;
+        font-size: clamp(13px, 3.5dvh, 15px);
+        line-height: 1.2;
+    }
+
+    #love {
+        gap: clamp(2px, 1dvh, 6px);
+    }
+
+    #love .big-heart {
+        font-size: clamp(38px, 12dvh, 58px);
+        line-height: 1;
+    }
+
+    #love .qualities {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(5px, 1.5dvh, 9px);
+        width: min(88vw, 700px);
+        margin: clamp(5px, 1.6dvh, 10px) 0;
+    }
+
+    #love .qualities div {
+        padding: clamp(7px, 1.8dvh, 11px) clamp(10px, 2vw, 18px);
+        font-size: clamp(14px, 3.8dvh, 17px);
+        line-height: 1.25;
+    }
+
+    #final {
+        justify-content: center;
+        gap: 0;
+        padding: clamp(5px, 1.8dvh, 10px) clamp(12px, 2vw, 22px);
+        overflow-y: auto;
+    }
+
+    #final .cake {
+        width: min(72vw, 72dvh, 500px);
+        height: min(60dvh, 240px);
+    }
+
+    #final .final-instruction {
+        font-size: clamp(16px, 4.5dvh, 20px);
+        line-height: 1.2;
+    }
+
+    #final .final-wish-button {
+        min-height: 44px;
+        margin: 2px 0;
+    }
+
+    #final .wish-reveal {
+        width: min(100%, 680px);
+        padding: 2px 8px 4px;
+    }
+
+    #final .wish-result {
+        margin: 2px;
+        font-size: clamp(17px, 4.8dvh, 22px);
+        line-height: 1.2;
+    }
+
+    #final .after-wish p {
+        margin: 4px auto;
+        font-size: clamp(14px, 3.8dvh, 17px);
+        line-height: 1.25;
+    }
+
+    #final.celebration-active .cake {
+        width: min(42vw, 40dvh, 220px);
+        height: min(33dvh, 140px);
     }
 }

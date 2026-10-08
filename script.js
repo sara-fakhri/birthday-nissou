@@ -17,6 +17,64 @@ function changeScreen(currentId, nextId) {
 
 
 /* =====================================
+   WELCOME BALLOONS
+===================================== */
+
+function createBalloonField() {
+
+    const field =
+        document.querySelector(".balloon-field");
+
+    const colors = ["pink", "light-pink", "red", "white", "purple"];
+    const accents = ["♡", "✦", "♥", "✧"];
+    let created = 0;
+
+    function releaseBalloon() {
+
+        if (created >= 36) {
+            return;
+        }
+
+        const balloon = document.createElement("span");
+        const drift = Math.random() * 100 - 50;
+        const tilt = Math.random() * 18 - 9;
+
+        balloon.className =
+            "balloon balloon-" + colors[Math.floor(Math.random() * colors.length)];
+        balloon.style.left = (3 + Math.random() * 94) + "%";
+        balloon.style.width = (28 + Math.random() * 24) + "px";
+        balloon.style.setProperty("--drift", drift + "px");
+        balloon.style.setProperty("--drift-middle", drift * 0.55 + "px");
+        balloon.style.setProperty("--tilt", tilt + "deg");
+        balloon.style.setProperty("--tilt-return", -tilt + "deg");
+        balloon.style.animationDuration = (11 + Math.random() * 7) + "s";
+        field.appendChild(balloon);
+        balloon.addEventListener("animationend", () => balloon.remove());
+
+        if (created % 4 === 1) {
+            const accent = document.createElement("span");
+            accent.className = "balloon-accent";
+            accent.textContent = accents[Math.floor(Math.random() * accents.length)];
+            accent.style.left = (3 + Math.random() * 94) + "%";
+            accent.style.animationDuration = (7 + Math.random() * 4) + "s";
+            field.appendChild(accent);
+            accent.addEventListener("animationend", () => accent.remove());
+        }
+
+        created++;
+
+        if (created < 36) {
+            setTimeout(releaseBalloon, 160 + Math.random() * 200);
+        }
+    }
+
+    releaseBalloon();
+}
+
+createBalloonField();
+
+
+/* =====================================
    FIRST SCREEN
 ===================================== */
 
@@ -148,20 +206,20 @@ function createPhotoHeart() {
                 );
 
             const source =
-                availablePhotos[index % availablePhotos.length];
+                "SN/" + availablePhotos[index % availablePhotos.length];
 
             img.src = source;
             img.alt = "Photo mémoire " + (index + 1);
             img.classList.add("memory-photo");
 
-            img.style.width = config.width + "px";
+            img.style.width = "min(" + config.width + "px, 13vw)";
             img.style.left = config.left + "%";
             img.style.top = config.top + "%";
             img.style.transform = "rotate(" + config.rotate + "deg)";
             img.style.animationDelay = (index * 0.08) + "s";
 
             img.onerror = () => {
-                img.src =  availablePhotos[index % availablePhotos.length];
+                img.src = "SN/" + availablePhotos[index % availablePhotos.length];
             };
 
             heart.appendChild(img);
@@ -190,18 +248,77 @@ function showLove() {
    LOVE → FINAL
 ===================================== */
 
+function createFinalCandles() {
+
+    const group =
+        document.getElementById("candleGroup");
+
+    for (let index = 0; index < 20; index++) {
+
+        const row = Math.floor(index / 10);
+        const column = index % 10;
+        const candle = document.createElement("div");
+        const wick = document.createElement("span");
+        const flame = document.createElement("span");
+
+        candle.className = row === 0 ? "candle candle-front" : "candle candle-back";
+        candle.style.left = (10 + column * 8.1 + row * 4) + "%";
+        wick.className = "wick";
+        flame.className = "flame";
+        flame.style.setProperty("--extinguish-delay", (index * 75) + "ms");
+        candle.append(wick, flame);
+        group.appendChild(candle);
+    }
+}
+
+createFinalCandles();
+
+let wishStarted = false;
+
+function makeWish() {
+
+    if (wishStarted) {
+        return;
+    }
+
+    wishStarted = true;
+
+    const finalScreen = document.getElementById("final");
+    const wishButton = document.querySelector(".final-wish-button");
+
+    wishButton.disabled = true;
+    finalScreen.classList.add("wish-started");
+
+    document.querySelectorAll("#candleGroup .flame").forEach((flame) => {
+        flame.classList.add("flame-extinguishing");
+    });
+
+    setTimeout(() => {
+        finalScreen.classList.add("celebration-active");
+        createConfetti();
+
+        setTimeout(() => {
+            const wishReveal = document.getElementById("wishReveal");
+            const afterWish = document.getElementById("afterWish");
+
+            wishReveal.hidden = false;
+            requestAnimationFrame(() => wishReveal.classList.add("is-visible"));
+
+            setTimeout(() => {
+                afterWish.hidden = false;
+                requestAnimationFrame(() => afterWish.classList.add("is-visible"));
+                wishReveal.scrollIntoView({ behavior: "smooth", block: "center" });
+            }, 1400);
+        }, 700);
+    }, 2350);
+}
+
 function showFinal() {
 
     changeScreen(
         "love",
         "final"
     );
-
-    setTimeout(() => {
-
-        createConfetti();
-
-    }, 800);
 
 }
 
@@ -218,79 +335,38 @@ function createConfetti() {
         );
 
 
-    const symbols = [
+    const confettiSymbols = ["✦", "✧", "·", "♡", "✿", "♥"];
+    const floatingSymbols = ["♡", "♥", "✦", "✧"];
 
-        "❤️",
-        "💕",
-        "🌸",
-        "✨",
-        "🌹",
-        "♡"
+    for (let index = 0; index < 72; index++) {
 
-    ];
+        const piece = document.createElement("span");
+        const drift = Math.random() * 160 - 80;
 
+        piece.className = "celebration-confetti";
+        piece.textContent = confettiSymbols[Math.floor(Math.random() * confettiSymbols.length)];
+        piece.style.left = Math.random() * 100 + "%";
+        piece.style.setProperty("--drift", drift + "px");
+        piece.style.setProperty("--spin", (180 + Math.random() * 540) + "deg");
+        piece.style.setProperty("--duration", (3.8 + Math.random() * 2.4) + "s");
+        piece.style.animationDelay = (Math.random() * 1.2) + "s";
+        piece.style.fontSize = (11 + Math.random() * 11) + "px";
+        container.appendChild(piece);
+        piece.addEventListener("animationend", () => piece.remove());
+    }
 
-    for (
-        let i = 0;
-        i < 60;
-        i++
-    ) {
+    for (let index = 0; index < 20; index++) {
 
-        const piece =
-            document.createElement(
-                "span"
-            );
+        const piece = document.createElement("span");
 
-
-        piece.innerHTML =
-            symbols[
-                Math.floor(
-                    Math.random()
-                    * symbols.length
-                )
-            ];
-
-
-        piece.style.position =
-            "fixed";
-
-
-        piece.style.left =
-            Math.random() * 100
-            + "vw";
-
-
-        piece.style.top =
-            "-30px";
-
-
-        piece.style.fontSize =
-            Math.random() * 20
-            + 15
-            + "px";
-
-
-        piece.style.zIndex =
-            "100";
-
-
-        piece.style.animation =
-            `fall ${
-                Math.random() * 3 + 3
-            }s linear forwards`;
-
-
-        container.appendChild(
-            piece
-        );
-
-
-        setTimeout(() => {
-
-            piece.remove();
-
-        }, 6000);
-
+        piece.className = "celebration-float";
+        piece.textContent = floatingSymbols[Math.floor(Math.random() * floatingSymbols.length)];
+        piece.style.left = (5 + Math.random() * 90) + "%";
+        piece.style.setProperty("--drift", (Math.random() * 70 - 35) + "px");
+        piece.style.setProperty("--duration", (4 + Math.random() * 3) + "s");
+        piece.style.animationDelay = (Math.random() * 1.5) + "s";
+        container.appendChild(piece);
+        piece.addEventListener("animationend", () => piece.remove());
     }
 
 }
